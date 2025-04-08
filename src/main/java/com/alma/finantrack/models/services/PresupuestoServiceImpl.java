@@ -1,16 +1,18 @@
 package com.alma.finantrack.models.services;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.alma.finantrack.models.entity.Presupuesto;
 
+import com.alma.finantrack.models.dao.IPresupuestoDAO;
+import com.alma.finantrack.models.entity.Presupuesto;
 
 @Service
 public class PresupuestoServiceImpl implements PresupuestoService {
 
     @Autowired
-    private PresupuestoRepository presupuestoRepository;
+    private IPresupuestoDAO presupuestoRepository;
 
     @Override
     public List<Presupuesto> findAll() {

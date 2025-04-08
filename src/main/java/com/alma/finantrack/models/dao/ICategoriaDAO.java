@@ -1,9 +1,9 @@
 package com.alma.finantrack.models.dao;
 
-import com.alma.finantrack.models.entity.Cuenta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import com.alma.finantrack.models.entity.Categoria;
 
 @Repository
-public interface ICategoriaDAO extends JpaRepository<Cuenta, Long> {
+public interface ICategoriaDAO extends JpaRepository<Categoria, Long> {
 }
