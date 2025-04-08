@@ -1,15 +1,27 @@
 package com.alma.finantrack.controllers;
 
-import com.alma.finantrack.models.entity.Usuario;
-import com.alma.finantrack.models.services.UsuarioService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.alma.finantrack.models.entity.Usuario;
+import com.alma.finantrack.models.services.UsuarioService;
+
+import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
@@ -34,7 +46,7 @@ public class UsuarioController {
 
     // Crear un nuevo usuario
     @PostMapping
-    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> createUsuario(@Valid @RequestBody Usuario usuario) {
         Usuario savedUsuario = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUsuario);
     }
@@ -46,7 +58,6 @@ public class UsuarioController {
         if (existingUsuario == null) {
             return ResponseEntity.notFound().build();
         }
-        usuario.setId(id);
         Usuario updatedUsuario = usuarioService.save(usuario);
         return ResponseEntity.ok(updatedUsuario);
     }

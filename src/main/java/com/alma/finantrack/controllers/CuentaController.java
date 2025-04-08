@@ -1,7 +1,5 @@
 package com.alma.finantrack.controllers;
 
-import com.alma.finantrack.models.entity.Categoria;
-import com.alma.finantrack.models.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +9,7 @@ import com.alma.finantrack.models.entity.Cuenta;
 import com.alma.finantrack.models.services.CuentaService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/cuentas")
 public class CuentaController {
 
@@ -47,7 +46,6 @@ public class CuentaController {
         if (existingCuenta == null) {
             return ResponseEntity.notFound().build();
         }
-        cuenta.setId(id);
         Cuenta updatedCuenta = cuentaService.save(cuenta);
         return ResponseEntity.ok(updatedCuenta);
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/categorias")
 public class CategoriaController {
 
@@ -45,7 +46,6 @@ public class CategoriaController {
         if (existingCategoria == null) {
             return ResponseEntity.notFound().build();
         }
-        categoria.setId(id);
         Categoria updatedCategoria = categoriaService.save(categoria);
         return ResponseEntity.ok(updatedCategoria);
     }

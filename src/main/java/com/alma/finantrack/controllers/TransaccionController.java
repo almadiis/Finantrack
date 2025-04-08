@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/transacciones")
 public class TransaccionController {
 
@@ -45,7 +46,6 @@ public class TransaccionController {
         if (existingTransaccion == null) {
             return ResponseEntity.notFound().build();
         }
-        transaccion.setId(id);
         Transaccion updatedTransaccion = transaccionService.save(transaccion);
         return ResponseEntity.ok(updatedTransaccion);
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/presupuestos")
 public class PresupuestoController {
 
@@ -45,7 +46,6 @@ public class PresupuestoController {
         if (existingPresupuesto == null) {
             return ResponseEntity.notFound().build();
         }
-        presupuesto.setId(id);
         Presupuesto updatedPresupuesto = presupuestoService.save(presupuesto);
         return ResponseEntity.ok(updatedPresupuesto);
     }

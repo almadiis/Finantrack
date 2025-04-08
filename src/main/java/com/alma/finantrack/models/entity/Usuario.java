@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,13 +26,15 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull(message = "El nombre no puede ser nulo")
     private String nombre;
 
     @Column(name = "correo", unique = true, nullable = false)
     private String correo;
 
-    @Column(name = "contraseña", nullable = false)
-    private String contraseña;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
