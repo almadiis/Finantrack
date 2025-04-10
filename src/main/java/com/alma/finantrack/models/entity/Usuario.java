@@ -11,10 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 // Modelo Usuario
 @Entity
@@ -25,9 +25,8 @@ import lombok.NoArgsConstructor;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     
-    @NotNull(message = "El nombre no puede ser nulo")
     private String nombre;
 
     @Column(name = "correo", unique = true, nullable = false)
@@ -42,4 +41,64 @@ public class Usuario {
     
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Cuenta> cuentas;
+    
+    // Constructor sin parámetros
+    public Usuario() {}
+    
+    public Usuario(String nombre, String correo, String password) {
+		this.nombre = nombre;
+		this.correo = correo;
+		this.password = password;
+		this.fechaRegistro = LocalDateTime.now(); // Asignar fecha de registro al crear el usuario
+	}
+    
+ // Getter para id
+    public int getId() {
+        return id;
+    }
+
+    // Setter para id
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // Getter para nombre
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Setter para nombre
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    // Getter para correo
+    public String getCorreo() {
+        return correo;
+    }
+
+    // Setter para correo
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    // Getter para password
+    public String getPassword() {
+        return password;
+    }
+
+    // Setter para password
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // Getter para fechaRegistro
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    // Setter para fechaRegistro
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
 }

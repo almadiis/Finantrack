@@ -1,12 +1,14 @@
 package com.alma.finantrack.models.services;
 
 
-import com.alma.finantrack.models.entity.Cuenta;
 import java.util.List;
 
+import com.alma.finantrack.models.dto.CuentaDTO;
+import com.alma.finantrack.models.entity.Cuenta;
+
 public interface CuentaService {
-    List<Cuenta> findAll();
-    Cuenta findById(Long id);
-    Cuenta save(Cuenta cuenta);
-    void deleteById(Long id);
+	List<CuentaDTO> findAll();
+    CuentaDTO findById(int id);
+    CuentaDTO save(Cuenta cuenta);
+    void deleteById(int id);
 }

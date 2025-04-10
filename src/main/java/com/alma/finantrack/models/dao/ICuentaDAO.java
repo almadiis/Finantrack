@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICuentaDAO extends JpaRepository<Cuenta, Long> {
-    // Aquí puedes agregar métodos personalizados si es necesario
+public interface ICuentaDAO extends JpaRepository<Cuenta, Integer> {
 }

@@ -24,7 +24,7 @@ public class CategoriaController {
 
     // Obtener una categoría por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> getCategoriaById(@PathVariable Long id) {
+    public ResponseEntity<Categoria> getCategoriaById(@PathVariable int id) {
         Categoria categoria = categoriaService.findById(id);
         if (categoria == null) {
             return ResponseEntity.notFound().build();
@@ -41,7 +41,7 @@ public class CategoriaController {
 
     // Actualizar una categoría existente
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> updateCategoria(@PathVariable Long id, @RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> updateCategoria(@PathVariable int id, @RequestBody Categoria categoria) {
         Categoria existingCategoria = categoriaService.findById(id);
         if (existingCategoria == null) {
             return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class CategoriaController {
 
     // Eliminar una categoría
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategoria(@PathVariable int id) {
         Categoria categoria = categoriaService.findById(id);
         if (categoria == null) {
             return ResponseEntity.notFound().build();

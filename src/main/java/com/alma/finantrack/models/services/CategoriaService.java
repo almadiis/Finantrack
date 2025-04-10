@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface CategoriaService {
     List<Categoria> findAll();
-    Categoria findById(Long id);
+    Categoria findById(int id);
     Categoria save(Categoria categoria);
-    void deleteById(Long id);
+    void deleteById(int id);
 }

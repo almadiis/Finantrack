@@ -22,18 +22,65 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "cuentas")
 public class Cuenta {
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id;
- private String nombre;
- private Double saldo;
- private String tipo; // banco, efectivo, tarjeta
+	
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private int id;
+	 private String nombre;
+	 private Double saldo;
+	 private String tipo; // banco, efectivo, tarjeta
+	
+	 Cuenta(String nombre, Double saldo, String tipo) {
+		 this.nombre = nombre;
+		 this.saldo = saldo;
+		 this.tipo = tipo;
+	 }
+	 Cuenta(){}
+	 
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "usuario_id")
+	 private Usuario usuario;
+	 
+	 @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+	 private List<Transaccion> transacciones;
+	 
+	 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Double getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
+	}
 
- 
- @ManyToOne
- @JoinColumn(name = "usuario_id")
- private Usuario usuario;
- 
- @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
- private List<Transaccion> transacciones;
 }

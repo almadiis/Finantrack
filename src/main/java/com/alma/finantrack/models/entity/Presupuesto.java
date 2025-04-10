@@ -19,9 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "presupuestos")
 public class Presupuesto {
-    @Id
+  
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -41,4 +42,56 @@ public class Presupuesto {
 
     @Column(name = "fecha_fin")
     private Date fechaFin;
+    
+    Presupuesto(String periodo, Double montoMaximo, Date fechaInicio, Date fechaFin) {
+		this.periodo = periodo;
+		this.montoMaximo = montoMaximo;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
+    }
+    Presupuesto() {}
+    
+    public int getId() {
+  		return id;
+  	}
+  	public void setId(int id) {
+  		this.id = id;
+  	}
+  	public Usuario getUsuario() {
+  		return usuario;
+  	}
+  	public void setUsuario(Usuario usuario) {
+  		this.usuario = usuario;
+  	}
+  	public Categoria getCategoria() {
+  		return categoria;
+  	}
+  	public void setCategoria(Categoria categoria) {
+  		this.categoria = categoria;
+  	}
+  	public Double getMontoMaximo() {
+  		return montoMaximo;
+  	}
+  	public void setMontoMaximo(Double montoMaximo) {
+  		this.montoMaximo = montoMaximo;
+  	}
+  	public String getPeriodo() {
+  		return periodo;
+  	}
+  	public void setPeriodo(String periodo) {
+  		this.periodo = periodo;
+  	}
+  	public Date getFechaInicio() {
+  		return fechaInicio;
+  	}
+  	public void setFechaInicio(Date fechaInicio) {
+  		this.fechaInicio = fechaInicio;
+  	}
+  	public Date getFechaFin() {
+  		return fechaFin;
+  	}
+  	public void setFechaFin(Date fechaFin) {
+  		this.fechaFin = fechaFin;
+  	}
+    	
 }

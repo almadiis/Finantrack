@@ -1,11 +1,13 @@
 package com.alma.finantrack.models.services;
 
-import com.alma.finantrack.models.entity.Transaccion;
 import java.util.List;
 
+import com.alma.finantrack.models.dto.TransaccionDTO;
+import com.alma.finantrack.models.entity.Transaccion;
+
 public interface TransaccionService {
-    List<Transaccion> findAll();
-    Transaccion findById(Long id);
-    Transaccion save(Transaccion transaccion);
-    void deleteById(Long id);
+    List<TransaccionDTO> findAll();
+    TransaccionDTO findById(int id);
+    TransaccionDTO save(Transaccion transaccion);
+    void deleteById(int id);
 }

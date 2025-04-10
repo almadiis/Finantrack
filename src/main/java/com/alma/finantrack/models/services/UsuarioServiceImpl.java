@@ -1,34 +1,40 @@
 package com.alma.finantrack.models.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.alma.finantrack.models.dao.IUsuarioDAO;
+import com.alma.finantrack.models.dto.UsuarioDTO;
 import com.alma.finantrack.models.entity.Usuario;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    @Autowired
+	 @Autowired
     private IUsuarioDAO usuarioRepository;
 
-    @Override
-    public List<Usuario> findAll() {
-        return (List<Usuario>) usuarioRepository.findAll();
+    public List<UsuarioDTO> findAll() {
+        List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
+        return usuarios.stream()
+                .map(UsuarioDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
+    public UsuarioDTO findById(int id) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        return usuario != null ? UsuarioDTO.fromEntity(usuario) : null;
     }
 
-    @Override
-    public Usuario save(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO save(Usuario usuario) {
+        Usuario savedUsuario = usuarioRepository.save(usuario);
+        return UsuarioDTO.fromEntity(savedUsuario);
     }
 
-    @Override
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         usuarioRepository.deleteById(id);
     }
+
 }

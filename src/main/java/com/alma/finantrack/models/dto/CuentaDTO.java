@@ -1,14 +1,33 @@
 package com.alma.finantrack.models.dto;
 
-import lombok.Data;
+import com.alma.finantrack.models.entity.Cuenta;
 
-import java.util.List;
+import lombok.Data;
 
 @Data
 public class CuentaDTO {
-    private Long id;
+
+    private int id;
     private String nombre;
-    private String tipo;
     private Double saldo;
-    private List<TransaccionDTO> transacciones;
+    private String tipo;
+
+    public CuentaDTO() {
+	}
+
+	public CuentaDTO(int id, String nombre, Double saldo, String tipo) {
+		this.id = id;
+		this.nombre = nombre;
+		this.saldo = saldo;
+		this.tipo = tipo;
+	}
+
+	public static CuentaDTO fromEntity(Cuenta cuenta) {
+        return new CuentaDTO(
+            cuenta.getId(),
+            cuenta.getNombre(),
+            cuenta.getSaldo(),
+            cuenta.getTipo()
+        );
+    }
 }

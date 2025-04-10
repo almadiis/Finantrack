@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface PresupuestoService {
     List<Presupuesto> findAll();
-    Presupuesto findById(Long id);
+    Presupuesto findById(int id);
     Presupuesto save(Presupuesto presupuesto);
-    void deleteById(Long id);
+    void deleteById(int id);
 }

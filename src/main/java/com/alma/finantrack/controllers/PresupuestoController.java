@@ -24,7 +24,7 @@ public class PresupuestoController {
 
     // Obtener un presupuesto por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Presupuesto> getPresupuestoById(@PathVariable Long id) {
+    public ResponseEntity<Presupuesto> getPresupuestoById(@PathVariable int id) {
         Presupuesto presupuesto = presupuestoService.findById(id);
         if (presupuesto == null) {
             return ResponseEntity.notFound().build();
@@ -41,7 +41,7 @@ public class PresupuestoController {
 
     // Actualizar un presupuesto existente
     @PutMapping("/{id}")
-    public ResponseEntity<Presupuesto> updatePresupuesto(@PathVariable Long id, @RequestBody Presupuesto presupuesto) {
+    public ResponseEntity<Presupuesto> updatePresupuesto(@PathVariable int id, @RequestBody Presupuesto presupuesto) {
         Presupuesto existingPresupuesto = presupuestoService.findById(id);
         if (existingPresupuesto == null) {
             return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class PresupuestoController {
 
     // Eliminar un presupuesto
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePresupuesto(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePresupuesto(@PathVariable int id) {
         Presupuesto presupuesto = presupuestoService.findById(id);
         if (presupuesto == null) {
             return ResponseEntity.notFound().build();

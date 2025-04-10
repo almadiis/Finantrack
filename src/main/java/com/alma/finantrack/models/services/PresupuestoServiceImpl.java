@@ -20,7 +20,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     }
 
     @Override
-    public Presupuesto findById(Long id) {
+    public Presupuesto findById(int id) {
         return presupuestoRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         presupuestoRepository.deleteById(id);
     }
 }

@@ -23,21 +23,55 @@ import lombok.NoArgsConstructor;
 @Table(name = "categorias")
 public class Categoria {
 	
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private int id;
+	 private String nombre;
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "usuario_id")
+	 private Usuario usuario;
 	
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id;
- 
- 
- private String nombre;
- 
- 
- @ManyToOne
- @JoinColumn(name = "usuario_id")
- private Usuario usuario;
-
- private String tipo; // ingreso o gasto
-
- @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
- private List<Transaccion> transacciones;
+	 private String tipo; // ingreso o gasto
+	
+	 @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	 private List<Transaccion> transacciones;
+	 
+	 
+	 public Categoria(String nombre, String tipo, Usuario usuario) {
+		 this.nombre = nombre;
+		 this.tipo = tipo;
+		 this.usuario = usuario;
+	}	
+	Categoria(){}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public List<Transaccion> getTransacciones() {
+		return transacciones;
+	}
+	public void setTransacciones(List<Transaccion> transacciones) {
+		this.transacciones = transacciones;
+	}
 } 
