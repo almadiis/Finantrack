@@ -1,9 +1,11 @@
 package com.alma.finantrack.models.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alma.finantrack.models.dao.ICategoriaDAO;
+import com.alma.finantrack.models.dto.CategoriaDTO;
 import com.alma.finantrack.models.entity.Categoria;
 
 @Service
@@ -13,18 +15,23 @@ public class CategoriaServiceImpl implements CategoriaService {
     private ICategoriaDAO categoriaRepository;
 
     @Override
-    public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+    public List<CategoriaDTO> findAll() {
+        List<Categoria> categorias = (List<Categoria>) categoriaRepository.findAll();
+        return categorias.stream()
+				.map(CategoriaDTO::fromEntity)
+				.collect(Collectors.toList());
     }
 
     @Override
-    public Categoria findById(int id) {
-        return categoriaRepository.findById(id).orElse(null);
+    public CategoriaDTO findById(int id) {
+        Categoria categoria = categoriaRepository.findById(id).orElse(null);
+        return categoria != null ? CategoriaDTO.fromEntity(categoria) : null;
     }
 
     @Override
-    public Categoria save(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public CategoriaDTO save(Categoria categoria) {
+        Categoria savedCategoria = categoriaRepository.save(categoria);
+        return CategoriaDTO.fromEntity(savedCategoria);
     }
 
     @Override

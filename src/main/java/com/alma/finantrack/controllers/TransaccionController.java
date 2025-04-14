@@ -47,6 +47,7 @@ public class TransaccionController {
         if (existingTransaccion == null) {
             return ResponseEntity.notFound().build();
         }
+        transaccion.setId(id); // Asegurarse de que el ID de la transacción a actualizar sea correcto
         TransaccionDTO updatedTransaccion = transaccionService.save(transaccion);
         return ResponseEntity.ok(updatedTransaccion);
     }

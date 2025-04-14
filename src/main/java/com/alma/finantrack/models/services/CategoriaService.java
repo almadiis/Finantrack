@@ -1,11 +1,12 @@
 package com.alma.finantrack.models.services;
 
-import com.alma.finantrack.models.entity.Categoria;
 import java.util.List;
+import com.alma.finantrack.models.dto.CategoriaDTO;
+import com.alma.finantrack.models.entity.Categoria;
 
 public interface CategoriaService {
-    List<Categoria> findAll();
-    Categoria findById(int id);
-    Categoria save(Categoria categoria);
+    List<CategoriaDTO> findAll();
+    CategoriaDTO findById(int id);
+    CategoriaDTO save(Categoria categoria);
     void deleteById(int id);
 }

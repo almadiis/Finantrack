@@ -1,12 +1,21 @@
 package com.alma.finantrack.controllers;
 
-import com.alma.finantrack.models.entity.Categoria;
-import com.alma.finantrack.models.services.CategoriaService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.alma.finantrack.models.dto.CategoriaDTO;
+import com.alma.finantrack.models.entity.Categoria;
+import com.alma.finantrack.models.services.CategoriaService;
 
 @RestController
 @CrossOrigin("*")
@@ -18,14 +27,14 @@ public class CategoriaController {
 
     // Obtener todas las categorías
     @GetMapping
-    public List<Categoria> getAllCategorias() {
+    public List<CategoriaDTO> getAllCategorias() {
         return categoriaService.findAll();
     }
 
     // Obtener una categoría por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> getCategoriaById(@PathVariable int id) {
-        Categoria categoria = categoriaService.findById(id);
+    public ResponseEntity<CategoriaDTO> getCategoriaById(@PathVariable int id) {
+    	CategoriaDTO categoria = categoriaService.findById(id);
         if (categoria == null) {
             return ResponseEntity.notFound().build();
         }
@@ -34,26 +43,27 @@ public class CategoriaController {
 
     // Crear una nueva categoría
     @PostMapping
-    public ResponseEntity<Categoria> createCategoria(@RequestBody Categoria categoria) {
-        Categoria savedCategoria = categoriaService.save(categoria);
+    public ResponseEntity<CategoriaDTO> createCategoria(@RequestBody Categoria categoria) {
+    	CategoriaDTO savedCategoria = categoriaService.save(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategoria);
     }
 
     // Actualizar una categoría existente
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> updateCategoria(@PathVariable int id, @RequestBody Categoria categoria) {
-        Categoria existingCategoria = categoriaService.findById(id);
+    public ResponseEntity<CategoriaDTO> updateCategoria(@PathVariable int id, @RequestBody Categoria categoria) {
+    	CategoriaDTO existingCategoria = categoriaService.findById(id);
         if (existingCategoria == null) {
             return ResponseEntity.notFound().build();
         }
-        Categoria updatedCategoria = categoriaService.save(categoria);
+        categoria.setId(id); // Asegúrate de que el ID de la categoría a actualizar sea correcto
+        CategoriaDTO updatedCategoria = categoriaService.save(categoria);
         return ResponseEntity.ok(updatedCategoria);
     }
 
     // Eliminar una categoría
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategoria(@PathVariable int id) {
-        Categoria categoria = categoriaService.findById(id);
+    	CategoriaDTO categoria = categoriaService.findById(id);
         if (categoria == null) {
             return ResponseEntity.notFound().build();
         }

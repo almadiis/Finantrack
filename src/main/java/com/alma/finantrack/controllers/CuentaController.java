@@ -55,6 +55,7 @@ public class CuentaController {
         if (existingCuenta == null) {
             return ResponseEntity.notFound().build();
         }
+        cuenta.setId(id); // Asegúrate de que el ID de la cuenta a actualizar sea correcto
         CuentaDTO updatedCuenta = cuentaService.save(cuenta);
         return ResponseEntity.ok(updatedCuenta);
     }

@@ -47,6 +47,7 @@ public class UsuarioController {
         if (existingUsuario == null) {
             return ResponseEntity.notFound().build();
         }
+        usuario.setId(id); // Asegurarse de que el ID del usuario a actualizar sea correcto
         UsuarioDTO updatedUsuario = usuarioService.save(usuario);
         return ResponseEntity.ok(updatedUsuario);
     }
