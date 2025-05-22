@@ -3,6 +3,7 @@ package com.alma.finantrack.models.dto;
 import java.io.Serializable;
 import com.alma.finantrack.models.entity.Transaccion;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 public class TransaccionDTO implements Serializable{
@@ -13,16 +14,20 @@ public class TransaccionDTO implements Serializable{
     private String fecha;
     private String descripcion;
     private String tipo;
-    private String cuentaNombre;
-    private String categoriaNombre;
+    @JsonProperty("id_categoria")
+    private int id_categoria;
+    @JsonProperty("id_cuenta")
+    private int id_cuenta;
     
     
-    public TransaccionDTO(int id, Double monto, String fecha, String descripcion, String tipo) {
+    public TransaccionDTO(int id, Double monto, String fecha, String descripcion, String tipo, int id_cuenta, int id_categoria) {
 		this.id = id;
 		this.monto = monto;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.tipo = tipo;
+		this.id_cuenta = id_cuenta;
+		this.id_categoria = id_categoria;
 	}
     
     public TransaccionDTO() {}
@@ -36,8 +41,8 @@ public class TransaccionDTO implements Serializable{
         dto.setFecha(transaccion.getFecha().toString());
         dto.setDescripcion(transaccion.getDescripcion());
         dto.setTipo(transaccion.getTipo());
-        dto.setCuentaNombre(transaccion.getCuenta().getNombre());
-        dto.setCategoriaNombre(transaccion.getCategoria().getNombre());
+        dto.setId_cuenta(transaccion.getCuenta().getId());
+        dto.setId_categoria(transaccion.getCategoria().getId());
         return dto;
     }
 
@@ -85,21 +90,19 @@ public class TransaccionDTO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public String getCategoriaNombre() {
-		return categoriaNombre;
+    public int getId_categoria() {
+    	return id_categoria;
+    }
+	public void setId_categoria(int id_categoria) {
+			this.id_categoria = id_categoria;
 	}
 
-	public void setCategoriaNombre(String categoriaNombre) {
-		this.categoriaNombre = categoriaNombre;
+	public int getId_cuenta() {
+		return id_cuenta;
 	}
 
-	public String getCuentaNombre() {
-		return cuentaNombre;
-	}
-
-	public void setCuentaNombre(String cuentaNombre) {
-		this.cuentaNombre = cuentaNombre;
+	public void setId_cuenta(int id_cuenta) {
+		this.id_cuenta = id_cuenta;
 	}
 
 }

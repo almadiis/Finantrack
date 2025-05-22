@@ -1,9 +1,6 @@
 package com.alma.finantrack.models.entity;
 
 import java.sql.Date;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +27,7 @@ public class Transaccion {
 	 private String descripcion;
 	 private String tipo; // ingreso o gasto
 	
-	 Transaccion() {
+	 public Transaccion() {
 	 }
 	 
 	 public Transaccion(int id, Double monto, Date fecha, String descripcion, String tipo) {

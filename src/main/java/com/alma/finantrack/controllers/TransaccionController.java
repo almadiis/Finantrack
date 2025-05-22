@@ -35,10 +35,16 @@ public class TransaccionController {
 
     // Crear una nueva transacción
     @PostMapping
-    public ResponseEntity<TransaccionDTO> createTransaccion(@RequestBody Transaccion transaccion) {
-        TransaccionDTO savedTransaccion = transaccionService.save(transaccion);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedTransaccion);
+    public ResponseEntity<TransaccionDTO> createTransaccion(@RequestBody TransaccionDTO transaccionDTO) {
+        try {
+            TransaccionDTO savedTransaccion = transaccionService.save(transaccionDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedTransaccion);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
 
     // Actualizar una transacción existente
     @PutMapping("/{id}")

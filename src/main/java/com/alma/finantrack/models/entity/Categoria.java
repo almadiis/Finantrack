@@ -23,11 +23,25 @@ import lombok.NoArgsConstructor;
 @Table(name = "categorias")
 public class Categoria {
 	
-	 @Id
+	 public String getIcono() {
+		return icono;
+	}
+	public void setIcono(String icono) {
+		this.icono = icono;
+	}
+	public String getColorHex() {
+		return colorHex;
+	}
+	public void setColorHex(String colorHex) {
+		this.colorHex = colorHex;
+	}
+	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private int id;
 	 private String nombre;
-	 
+	 private String icono;     // nombre del icono o URL si se descarga
+	 private String colorHex;  // formato "#RRGGBB"
+
 	 @ManyToOne
 	 @JoinColumn(name = "usuario_id")
 	 private Usuario usuario;

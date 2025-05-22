@@ -7,12 +7,19 @@ import org.springframework.stereotype.Service;
 import com.alma.finantrack.models.dao.IPresupuestoDAO;
 import com.alma.finantrack.models.dto.PresupuestoDTO;
 import com.alma.finantrack.models.entity.Presupuesto;
+import com.alma.finantrack.models.dao.ICategoriaDAO;
+import com.alma.finantrack.models.dao.IUsuarioDAO;
+import java.sql.Date;
 
 @Service
 public class PresupuestoServiceImpl implements PresupuestoService {
 
     @Autowired
     private IPresupuestoDAO presupuestoRepository;
+    @Autowired
+    private ICategoriaDAO categoriaRepository;
+    @Autowired
+    private IUsuarioDAO usuarioRepository;
 
     @Override
     public List<PresupuestoDTO> findAll() {
@@ -29,9 +36,26 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     }
 
     @Override
-    public PresupuestoDTO save(Presupuesto presupuesto) {
-        Presupuesto savedPresupuesto = presupuestoRepository.save(presupuesto);
-        return PresupuestoDTO.fromEntity(savedPresupuesto);
+    public PresupuestoDTO save(PresupuestoDTO dto) {
+        Presupuesto entity = new Presupuesto();
+        entity.setId(dto.getId());
+        entity.setMontoMaximo(dto.getMontoMaximo());
+        entity.setPeriodo(dto.getPeriodo());
+
+        try {
+            entity.setFechaInicio(Date.valueOf(dto.getFechaInicio()));
+            entity.setFechaFin(Date.valueOf(dto.getFechaFin()));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Formato de fecha incorrecto. Esperado yyyy-MM-dd", e);
+        }
+
+        entity.setCategoria(categoriaRepository.findById(dto.getCategoria())
+            .orElseThrow(() -> new RuntimeException("Categoría no encontrada")));
+        entity.setUsuario(usuarioRepository.findById(dto.getId_usuario())
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
+
+        Presupuesto saved = presupuestoRepository.save(entity);
+        return PresupuestoDTO.fromEntity(saved);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.alma.finantrack.controllers;
 
 import com.alma.finantrack.models.dto.UsuarioDTO;
+import com.alma.finantrack.models.dto.LoginDTO;
 import com.alma.finantrack.models.services.UsuarioService;
 import com.alma.finantrack.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,21 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioDTO> login(@RequestBody LoginDTO loginRequest) {
+        UsuarioDTO user = usuarioService.findByNombreAndPassword(
+            loginRequest.getNombre(), 
+            loginRequest.getPassword()
+        );
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok(user);
+    }
+
 
     // Obtener todos los usuarios
     @GetMapping
@@ -47,10 +63,17 @@ public class UsuarioController {
         if (existingUsuario == null) {
             return ResponseEntity.notFound().build();
         }
-        usuario.setId(id); // Asegurarse de que el ID del usuario a actualizar sea correcto
+
+        // Si la contraseña no viene, conservar la actual
+        if (usuario.getPassword() == null || usuario.getPassword().isBlank()) {
+            usuario.setPassword(existingUsuario.getPassword());
+        }
+
+        usuario.setId(id);
         UsuarioDTO updatedUsuario = usuarioService.save(usuario);
         return ResponseEntity.ok(updatedUsuario);
     }
+
 
     // Eliminar un usuario
     @DeleteMapping("/{id}")

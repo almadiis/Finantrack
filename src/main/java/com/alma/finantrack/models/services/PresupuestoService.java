@@ -7,6 +7,6 @@ import com.alma.finantrack.models.entity.Presupuesto;
 public interface PresupuestoService {
     List<PresupuestoDTO> findAll();
     PresupuestoDTO findById(int id);
-    PresupuestoDTO save(Presupuesto presupuesto);
+    PresupuestoDTO save(PresupuestoDTO presupuesto);
     void deleteById(int id);
 }

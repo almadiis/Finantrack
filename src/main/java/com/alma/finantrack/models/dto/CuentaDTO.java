@@ -14,12 +14,14 @@ public class CuentaDTO implements Serializable{
     private String nombre;
     private Double saldo;
     private String tipo;
+    private int usuario_id;
 
-	public CuentaDTO(int id, String nombre, Double saldo, String tipo) {
+	public CuentaDTO(int id, String nombre, Double saldo, String tipo, int usuarioId) {
 		this.id = id;
 		this.nombre = nombre;
 		this.saldo = saldo;
 		this.tipo = tipo;
+		this.usuario_id = usuarioId;
 	}
 
 	public static CuentaDTO fromEntity(Cuenta cuenta) {
@@ -27,7 +29,8 @@ public class CuentaDTO implements Serializable{
             cuenta.getId(),
             cuenta.getNombre(),
             cuenta.getSaldo(),
-            cuenta.getTipo()
+            cuenta.getTipo(),
+            cuenta.getUsuario().getId()
         );
     }
 
@@ -62,4 +65,11 @@ public class CuentaDTO implements Serializable{
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public int getUsuarioId() {
+		return usuario_id;
+	}
+	public void setUsuarioId(int usuarioId) {
+		this.usuario_id = usuarioId;
+	}
+	
 }

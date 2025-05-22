@@ -30,7 +30,7 @@ public class Presupuesto {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
+    private Categoria categoria_id;
 
     @Column(name = "monto_maximo")
     private Double montoMaximo;
@@ -49,7 +49,7 @@ public class Presupuesto {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
     }
-    Presupuesto() {}
+    public Presupuesto() {}
     
     public int getId() {
   		return id;
@@ -64,10 +64,10 @@ public class Presupuesto {
   		this.usuario = usuario;
   	}
   	public Categoria getCategoria() {
-  		return categoria;
+  		return categoria_id;
   	}
   	public void setCategoria(Categoria categoria) {
-  		this.categoria = categoria;
+  		this.categoria_id = categoria;
   	}
   	public Double getMontoMaximo() {
   		return montoMaximo;

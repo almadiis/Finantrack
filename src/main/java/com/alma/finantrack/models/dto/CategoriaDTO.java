@@ -8,24 +8,49 @@ import lombok.Data;
 @Data
 public class CategoriaDTO implements Serializable{
 
+	public String getIcono() {
+		return icono;
+	}
+
+	public void setIcono(String icono) {
+		this.icono = icono;
+	}
+
+	public String getColorHex() {
+		return colorHex;
+	}
+
+	public void setColorHex(String colorHex) {
+		this.colorHex = colorHex;
+	}
 	private static final long serialVersionUID = 1L;
 	private int id;
     private String nombre;
     private String tipo;
-    
-    public CategoriaDTO(int id, String nombre, String tipo) {
-		this.id = id;
-		this.nombre = nombre;
-		this.tipo = tipo;
+    private String icono;
+    private String colorHex;
+    private Integer usuarioId;
+
+    public CategoriaDTO(int id, String nombre, String tipo, String icono, String colorHex, Integer usuarioId) {
+    	this.id = id;
+    	this.nombre = nombre;
+    	this.tipo = tipo;
+    	this.icono = icono;
+    	this.colorHex = colorHex;
+    	this.usuarioId = usuarioId;
     }
-    
+
     public static CategoriaDTO fromEntity(Categoria categoria) {
-        return new CategoriaDTO(
+    	return new CategoriaDTO(
     		categoria.getId(),
     		categoria.getNombre(),
-    		categoria.getTipo()
-        );
+    		categoria.getTipo(),
+    		categoria.getIcono(),
+    		categoria.getColorHex(),
+    		categoria.getUsuario() != null ? categoria.getUsuario().getId() : null
+    	);
     }
+
 	public int getId() {
 		return id;
 	}
@@ -46,5 +71,13 @@ public class CategoriaDTO implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(Integer usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 }

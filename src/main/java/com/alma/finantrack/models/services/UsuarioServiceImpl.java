@@ -37,4 +37,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+    @Override
+    public UsuarioDTO findByNombreAndPassword(String nombre, String password) {
+        return usuarioRepository.findByNombreAndPassword(nombre, password)
+                .map(UsuarioDTO::fromEntity)
+                .orElse(null);
+    }
+
+
 }

@@ -10,4 +10,5 @@ public interface UsuarioService {
     UsuarioDTO findById(int id);
     UsuarioDTO save(Usuario usuario);
     void deleteById(int id);
+    UsuarioDTO findByNombreAndPassword(String nombre, String password);
 }

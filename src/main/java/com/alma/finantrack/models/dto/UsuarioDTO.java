@@ -14,12 +14,14 @@ public class UsuarioDTO implements Serializable{
 	private int id;
     private String nombre;
     private String correo;
+    private String password;
 
 
-	public UsuarioDTO(int id2, String nombre2, String correo2) {
+	public UsuarioDTO(int id2, String nombre2, String correo2, String password2) {
 		this.id = id2;
 		this.nombre = nombre2;
 		this.correo = correo2;	
+		this.password = password2;
 	}
 
 
@@ -27,7 +29,8 @@ public class UsuarioDTO implements Serializable{
         return new UsuarioDTO(
         	usuario.getId(),
 			usuario.getNombre(),
-			usuario.getCorreo()	
+			usuario.getCorreo(),
+			usuario.getPassword()
         );
     }
 	
@@ -60,6 +63,12 @@ public class UsuarioDTO implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }

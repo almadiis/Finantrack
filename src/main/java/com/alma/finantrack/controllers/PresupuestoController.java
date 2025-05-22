@@ -43,14 +43,21 @@ public class PresupuestoController {
 
     // Crear un nuevo presupuesto
     @PostMapping
-    public ResponseEntity<PresupuestoDTO> createPresupuesto(@RequestBody Presupuesto presupuesto) {
-        PresupuestoDTO savedPresupuesto = presupuestoService.save(presupuesto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedPresupuesto);
+    public ResponseEntity<PresupuestoDTO> createPresupuesto(@RequestBody PresupuestoDTO dto) {
+        try {
+            PresupuestoDTO saved = presupuestoService.save(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (Exception e) {
+            e.printStackTrace(); // <-- IMPORTANTE: para ver el error real
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
+
 
     // Actualizar un presupuesto existente
     @PutMapping("/{id}")
-    public ResponseEntity<PresupuestoDTO> updatePresupuesto(@PathVariable int id, @RequestBody Presupuesto presupuesto) {
+    public ResponseEntity<PresupuestoDTO> updatePresupuesto(@PathVariable int id, @RequestBody PresupuestoDTO presupuesto) {
         PresupuestoDTO existingPresupuesto = presupuestoService.findById(id);
         if (existingPresupuesto == null) {
             return ResponseEntity.notFound().build();
